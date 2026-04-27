@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ArticleService } from '../../services/article.service';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,7 +13,7 @@ import { ArticleService } from '../../services/article.service';
 export class DashboardComponent implements OnInit {
   article: any;
 
-  constructor(private articleService: ArticleService) {}
+  constructor(private articleService: ArticleService, private authSservice: AuthService, private router: Router) {}
 
   async ngOnInit() {
     console.log('Dashboard loaded');
@@ -25,5 +27,10 @@ export class DashboardComponent implements OnInit {
     } catch (err) {
       console.error('Error loading article:', err);
     }
+  }
+
+  async logout() {
+    await this.authSservice.signOut();
+    this.router.navigate(['/']);
   }
 }
