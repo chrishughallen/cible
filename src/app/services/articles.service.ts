@@ -30,6 +30,6 @@ export class ArticlesService {
       throw error;
     }
 
-    return data;
+    return data ?? []; // 🔥 CRITICAL FIX
   }
 }
