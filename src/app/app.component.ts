@@ -1,6 +1,12 @@
-import { Component } from '@angular/core';
+import { ApplicationConfig, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { provideRouter } from '@angular/router';
+import { routes } from './app.routes';
 import { SupabaseService } from './services/supabase.service';
+
+export const appConfig: ApplicationConfig = {
+  providers: [provideRouter(routes)],
+};
 @Component({
   selector: 'app-root',
   standalone: true,
