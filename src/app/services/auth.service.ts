@@ -31,6 +31,42 @@ export class AuthService {
     return data.user;
   }
 
+  async getUserProfile() {
+    const user = await this.getUser();
+
+    if (!user) {
+      throw new Error('No user logged in');
+    }
+
+    const { data, error } = await this.supabase.supabase
+      .from('users')
+      .select('*')
+      .eq('id', user.id)
+      .maybeSingle();
+
+    if (error) throw error;
+
+    return data ?? { topics: [] };
+  }
+
+  async updateTopics(topics: string[]) {
+    const user = await this.getUser();
+
+    if (!user) {
+      throw new Error('No user logged in');
+    }
+
+    const { data, error } = await this.supabase.supabase
+      .from('users')
+      .update({ topics })
+      .eq('id', user.id)
+      .select();
+
+    if (error) {
+      throw error;
+    }
+  }
+
   signUp(email: string, password: string) {
     return this.supabase.supabase.auth.signUp({ email, password });
   }
@@ -46,7 +82,6 @@ export class AuthService {
     const { error } = await this.supabase.supabase.auth.signOut();
 
     if (error) {
-      console.error('Logout error:', error);
       throw error;
     }
   }

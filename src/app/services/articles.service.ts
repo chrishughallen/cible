@@ -38,7 +38,7 @@ export class ArticlesService {
       .from('articles')
       .select('*')
       .eq('id', id)
-      .single();
+      .maybeSingle();
 
     if (error) {
       console.error(error);
