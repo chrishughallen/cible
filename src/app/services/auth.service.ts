@@ -19,6 +19,18 @@ export class AuthService {
     });
   }
 
+  async getUser() {
+    const { data, error } =
+      await this.supabase.supabase.auth.getUser();
+
+    if (error) {
+      console.error('Error fetching user:', error);
+      return null;
+    }
+
+    return data.user;
+  }
+
   signUp(email: string, password: string) {
     return this.supabase.supabase.auth.signUp({ email, password });
   }
