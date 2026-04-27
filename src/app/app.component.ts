@@ -3,6 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { SupabaseService } from './services/supabase.service';
+import { HeaderComponent } from './components/header/header.component';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes)],
@@ -10,7 +11,7 @@ export const appConfig: ApplicationConfig = {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, HeaderComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

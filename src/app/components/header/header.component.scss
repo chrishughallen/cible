@@ -1,0 +1,19 @@
+header {
+  background: lightyellow;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  align-items: center;
+
+  .brand {
+    font-size: 1.75rem;
+    text-decoration: none;
+  }
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+}

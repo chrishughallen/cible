@@ -1,0 +1,15 @@
+<header>
+  <a routerLink="/" class="brand">Cible</a>
+
+  <nav>
+    @if(user) {
+      <a routerLink="/">Dashboard</a>
+      <a routerLink="/archive">Archive</a>
+      <a routerLink="/topics">My Topics</a>
+      <button (click)="logout()">Logout</button>
+    }
+    @else {
+      <a routerLink="/">Login</a>
+    }
+  </nav>
+</header>

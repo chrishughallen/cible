@@ -3,20 +3,27 @@ import { SupabaseService } from './supabase.service';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
+
 export class AuthService {
-  user$ = new BehaviorSubject<any>(null);
+  private userSubject = new BehaviorSubject<any>(null);
+  user$ = this.userSubject.asObservable();
 
   constructor(private supabase: SupabaseService) {
-    this.init();
+    this.initAuthListener();
   }
 
-  async init() {
+  private async initAuthListener() {
     const { data } = await this.supabase.supabase.auth.getSession();
-    this.user$.next(data.session?.user ?? null);
+    this.userSubject.next(data.session?.user ?? null);
 
     this.supabase.supabase.auth.onAuthStateChange((_event, session) => {
-      this.user$.next(session?.user ?? null);
+      this.userSubject.next(session?.user ?? null);
     });
+  }
+
+  async isLoggedIn(): Promise<boolean> {
+    const user = await this.getUser();
+    return !!user;
   }
 
   async getUser() {
