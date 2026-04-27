@@ -7,7 +7,7 @@ serve(async (req) => {
     const openAiKey = Deno.env.get("OPENAI_API_KEY");
 
     const fullPrompt = `
-You are a learning assistant that generates structured educational articles for software engineers.
+You are a learning assistant that generates structured educational articles about certain topics. Things should be explained in the ELI5 format on the topic provided. Enough content that it may take 3-5 minutes to read through for the average adult.
 
 Generate a learning article about: ${topic}
 

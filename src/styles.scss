@@ -1,11 +1,40 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+$color-primary: #272838;
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+body {
+  font-family: "Inter", sans-serif;
+}
+
 // TODO: Move to a more appropriate place than the general stylesheet
+
+// TYPOGRAPHY
+
+.serif-font {
+  font-family: 'Playfair Display', serif;
+}
+
+.sans-serif-font {
+  font-family: 'Inter', sans-serif;
+}
+
+.fs-lg {
+  font-size: 2rem;
+}
+
+.fs-xxl {
+  font-size: 3.5rem;
+}
+
+.fw-bold {
+  font-weight: bold;
+}
 
 .form-group {
   display: grid;
@@ -33,7 +62,7 @@
 }
 
 .form-control:focus {
-  border-color: #4f46e5;
+  border-color: $color-primary;
   box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
 }
 
@@ -45,13 +74,25 @@
 
 .form-button {
   padding: 10px 14px;
-  background: #4f46e5;
+  background: $color-primary;
   color: white;
   border: none;
   font-weight: 500;
   cursor: pointer;
   transition: 0.2s ease;
   justify-self: end;
+}
+
+.button {
+  display: inline-flex;
+  padding: 10px 14px;
+  background: $color-primary;
+  color: white;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s ease;
+  text-decoration: none;
 }
 
 .form-button:hover {
