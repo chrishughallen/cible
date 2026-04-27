@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { ArticleService } from '../../services/article.service';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
@@ -6,24 +7,21 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })
 export class DashboardComponent implements OnInit {
   article: any;
+  loading = true;
 
   constructor(private articleService: ArticleService, private authSservice: AuthService, private router: Router) {}
 
   async ngOnInit() {
-    console.log('Dashboard loaded');
-
     try {
-      const article = await this.articleService.getTodayArticle();
-
-      console.log('TODAY ARTICLE:', article);
-
-      this.article = article;
+      this.loading = true;
+      this.article = await this.articleService.getTodayArticle();
+      this.loading = false;
     } catch (err) {
       console.error('Error loading article:', err);
     }
