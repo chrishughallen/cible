@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { ArchiveComponent } from './pages/archive/archive.component';
 import { authGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
@@ -10,4 +11,9 @@ export const routes: Routes = [
     component: DashboardComponent,
     canActivate: [authGuard],
   },
+  {
+    path: 'archive',
+    component: ArchiveComponent,
+    canActivate: [authGuard]
+  }
 ];

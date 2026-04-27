@@ -1,1 +1,22 @@
-<p>archive works!</p>
+<h1>📚 Your Learning Archive</h1>
+
+<div *ngIf="loading">
+  Loading your learning history...
+</div>
+
+<div *ngIf="!loading && articles.length === 0">
+  No articles yet.
+</div>
+
+<div *ngIf="!loading">
+  <div *ngFor="let article of articles" class="article-card">
+
+    <h2>{{ article.title }}</h2>
+
+    <p><strong>Topic:</strong> {{ article.topic }}</p>
+
+    <p><strong>Date:</strong> {{ article.generated_for_date }}</p>
+
+    <hr />
+  </div>
+</div>
