@@ -1,31 +1,26 @@
-<h1>My Topics</h1>
+
 
 <div *ngIf="loading">
   Loading...
 </div>
 
-<div *ngIf="!loading">
+<div class="form-group" *ngIf="!loading">
+  <h1>My Topics</h1>
 
-  <label for="newTopic">Enter a topic you'd like to learn about</label>
-  <input
-    [(ngModel)]="newTopic"
-    placeholder="Enter a topic"
-  />
-
-  <button (click)="addTopic()">
-    Add Topic
-  </button>
+  <div class="form-control">
+    <label class="form-label" for="newTopic">Enter a topic you'd like to learn about</label>
+    <input id="newTopic" [(ngModel)]="newTopic" placeholder="System Design"/>
+  </div>
 
 
+  <button class="form-button" (click)="addTopic()">Add Topic</button>
+</div>
 
-  @if (topics.length != 0) {
+@if (topics.length != 0) {
   <hr />
   <h2>My Topics</h2>
 
   <div *ngFor="let topic of topics">
     • {{ topic }}
   </div>
-  }
-
-
-</div>
+}
