@@ -1,24 +1,37 @@
-<main *ngIf="article; else loading">
-  <article class="article">
-    <h1 class="title">{{ article.title }}</h1>
+<ng-container *ngIf="!loading; else loadingTpl">
 
-    <section>
-      <h2>Summary</h2>
-      <p>{{ article.summary }}</p>
-    </section>
+  <ng-container *ngIf="noTopics; else articleTpl">
+    <p>
+      No topics yet.
+      <a routerLink="/topics">Add topics to get started</a>
+    </p>
+  </ng-container>
 
-    <section>
-      <h2>Case Study</h2>
-      <p>{{ article.case_study }}</p>
-    </section>
+  <ng-template #articleTpl>
+    <main *ngIf="article">
+      <article class="article">
+        <h1 class="title">{{ article.title }}</h1>
 
-    <section>
-      <h2>Key Takeaway</h2>
-      <p>{{ article.takeaway }}</p>
-    </section>
-  </article>
-</main>
+        <section>
+          <h2>Summary</h2>
+          <p>{{ article.summary }}</p>
+        </section>
 
-<ng-template #loading>
+        <section>
+          <h2>Case Study</h2>
+          <p>{{ article.case_study }}</p>
+        </section>
+
+        <section>
+          <h2>Key Takeaway</h2>
+          <p>{{ article.takeaway }}</p>
+        </section>
+      </article>
+    </main>
+  </ng-template>
+
+</ng-container>
+
+<ng-template #loadingTpl>
   <p>Loading your daily learning article...</p>
 </ng-template>

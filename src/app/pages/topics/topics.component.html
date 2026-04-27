@@ -6,6 +6,7 @@
 
 <div *ngIf="!loading">
 
+  <label for="newTopic">Enter a topic you'd like to learn about</label>
   <input
     [(ngModel)]="newTopic"
     placeholder="Enter a topic"
@@ -15,12 +16,16 @@
     Add Topic
   </button>
 
-  <hr />
 
+
+  @if (topics.length != 0) {
+  <hr />
   <h2>My Topics</h2>
 
   <div *ngFor="let topic of topics">
     • {{ topic }}
   </div>
+  }
+
 
 </div>
