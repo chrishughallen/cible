@@ -1,12 +1,32 @@
-<h1>Sign Up</h1>
+<div class="form-group">
+  <h1>Sign Up</h1>
 
-<div *ngIf="error" style="color:red;">
-  {{ error }}
+  <div *ngIf="error" style="color:red;">
+    {{ error }}
+  </div>
+
+  <div class="form-control">
+    <label class="form-label" for="name"></label>
+    <input id="name" [(ngModel)]="name" placeholder="Name" />
+  </div>
+
+  <div class="form-control">
+    <label class="form-label" for="email"></label>
+    <input id="email" [(ngModel)]="email" placeholder="Email" />
+  </div>
+
+  <div class="form-control">
+    <label class="form-label" for="password"></label>
+    <input id="password" [(ngModel)]="password" type="password" placeholder="Password" />
+  </div>
+
+  <div class="form-control">
+    <label class="form-label" for="confirm-password"></label>
+    <input id="confirm-password" [(ngModel)]="confirmPassword" type="password" placeholder="Confirm Password" />
+  </div>
+
+  <div class="form-footer">
+    <span>Already have an account? <a routerLink="/login">Login</a></span>
+    <button class="form-button" (click)="signup()">Create Account</button>
+  </div>
 </div>
-
-<input [(ngModel)]="name" placeholder="Name" />
-<input [(ngModel)]="email" placeholder="Email" />
-<input [(ngModel)]="password" type="password" placeholder="Password" />
-<input [(ngModel)]="confirmPassword" type="password" placeholder="Confirm Password" />
-
-<button (click)="signup()">Create Account</button>
