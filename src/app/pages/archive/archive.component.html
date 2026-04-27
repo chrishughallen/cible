@@ -1,1 +1,17 @@
-<p>archive works!</p>
+<a routerLink="/dashboard">Today's Article</a>
+
+<h1>📚 Your Learning Archive</h1>
+
+<div *ngIf="loading">
+  Loading...
+</div>
+
+<div *ngIf="!loading">
+  <div *ngFor="let article of articles">
+    {{ article.title }}
+  </div>
+
+  <p *ngIf="articles.length === 0">
+    No articles yet
+  </p>
+</div>

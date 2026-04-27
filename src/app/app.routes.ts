@@ -1,13 +1,24 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { ArchiveComponent } from './pages/archive/archive.component';
 import { authGuard } from './core/guards/auth.guard';
+import { guestGuard } from './core/guards/guest.guard';
 
 export const routes: Routes = [
-  { path: '', component: LoginComponent },
-  {
-    path: 'dashboard',
-    component: DashboardComponent,
-    canActivate: [authGuard],
-  },
+{
+  path: '',
+  component: LoginComponent,
+  canActivate: [guestGuard]
+},
+{
+  path: 'dashboard',
+  component: DashboardComponent,
+  canActivate: [authGuard]
+},
+{
+  path: 'archive',
+  component: ArchiveComponent,
+  canActivate: [authGuard]
+}
 ];
