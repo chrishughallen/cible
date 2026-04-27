@@ -49,21 +49,40 @@ export class ArticleService {
     return newArticle;
   }
 
+  private async callEdgeFunction(topic: string) {
+    const res = await fetch(
+      'http://127.0.0.1:54321/functions/v1/generate-article',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ topic }),
+      }
+    );
+
+    return await res.json();
+  }
+
   private async generateArticle(userId: string, date: string) {
-    // TEMP: stub before OpenAI integration
-    const mockArticle = {
+    const topic = 'Angular Framework'; // later: user preferences
+
+    const aiArticle = await this.callEdgeFunction(topic);
+
+    const articleToInsert = {
       user_id: userId,
       generated_for_date: date,
-      title: 'Mock: Understanding System Design Basics',
-      topic: 'System Design',
-      summary: 'This is a placeholder article.',
-      case_study: 'Example case study here.',
-      takeaway: 'Always think in scalable systems.',
+      title: aiArticle.title,
+      topic,
+      summary: aiArticle.summary,
+      case_study: aiArticle.case_study,
+      takeaway: aiArticle.takeaway,
+      source_prompt: aiArticle.source_prompt,
     };
 
     const { data, error } = await this.supabase.supabase
       .from('articles')
-      .insert(mockArticle)
+      .insert(articleToInsert)
       .select()
       .single();
 
