@@ -39,11 +39,10 @@ export class AuthService {
   }
 
   async getUserProfile() {
-    const user = await this.getUser();
+    const { data: sessionData } = await this.supabase.supabase.auth.getSession();
+    const user = sessionData.session?.user;
 
-    if (!user) {
-      throw new Error('No user logged in');
-    }
+    if (!user) return null;
 
     const { data, error } = await this.supabase.supabase
       .from('users')
@@ -51,9 +50,12 @@ export class AuthService {
       .eq('id', user.id)
       .maybeSingle();
 
-    if (error) throw error;
+    if (error) {
+      console.error('Profile error:', error);
+      return null;
+    }
 
-    return data ?? { topics: [] };
+    return data;
   }
 
   async updateTopics(topics: string[]) {
