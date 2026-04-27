@@ -1,0 +1,26 @@
+<h1>My Topics</h1>
+
+<div *ngIf="loading">
+  Loading...
+</div>
+
+<div *ngIf="!loading">
+
+  <input
+    [(ngModel)]="newTopic"
+    placeholder="Enter a topic"
+  />
+
+  <button (click)="addTopic()">
+    Add Topic
+  </button>
+
+  <hr />
+
+  <h2>My Topics</h2>
+
+  <div *ngFor="let topic of topics">
+    • {{ topic }}
+  </div>
+
+</div>

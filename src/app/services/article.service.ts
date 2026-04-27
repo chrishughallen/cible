@@ -65,24 +65,46 @@ export class ArticleService {
   }
 
   private async generateArticle(userId: string, date: string) {
-    const topic = 'Angular Framework'; // later: user preferences
+    const profile = await this.auth.getUserProfile();
 
-    const aiArticle = await this.callEdgeFunction(topic);
+    const topics = profile.topics || [];
 
-    const articleToInsert = {
+    if (topics.length === 0) {
+      throw new Error('No topics found. Please add topics first.');
+    }
+
+    const randomIndex = Math.floor(Math.random() * topics.length);
+    const selectedTopic = topics[randomIndex];
+
+    const response = await fetch(
+      'http://127.0.0.1:54321/functions/v1/generate-article',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          topic: selectedTopic,
+        }),
+      }
+    );
+
+    const generatedArticle = await response.json();
+
+    const articleToSave = {
       user_id: userId,
       generated_for_date: date,
-      title: aiArticle.title,
-      topic,
-      summary: aiArticle.summary,
-      case_study: aiArticle.case_study,
-      takeaway: aiArticle.takeaway,
-      source_prompt: aiArticle.source_prompt,
+      topic: selectedTopic,
+      title: generatedArticle.title,
+      summary: generatedArticle.summary,
+      case_study: generatedArticle.case_study,
+      takeaway: generatedArticle.takeaway,
+      source_prompt: generatedArticle.source_prompt,
     };
 
     const { data, error } = await this.supabase.supabase
       .from('articles')
-      .insert(articleToInsert)
+      .insert(articleToSave)
       .select()
       .single();
 
