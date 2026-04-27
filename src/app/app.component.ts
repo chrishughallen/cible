@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-
+import { SupabaseService } from './services/supabase.service';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -10,4 +10,5 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'cible';
+  constructor(private supabase: SupabaseService) {}
 }
