@@ -1,1 +1,24 @@
-<p>article-detail works!</p>
+<a routerLink="/archive">Back to archive</a>
+<div *ngIf="loading">
+  Loading article...
+</div>
+
+<div *ngIf="!loading && article">
+
+  <h1>{{ article.title }}</h1>
+
+  <p><strong>Topic:</strong> {{ article.topic }}</p>
+  <p><strong>Date:</strong> {{ article.generated_for_date }}</p>
+
+  <hr />
+
+  <h2>Summary</h2>
+  <p>{{ article.summary }}</p>
+
+  <h2>Case Study</h2>
+  <p>{{ article.case_study }}</p>
+
+  <h2>Key Takeaway</h2>
+  <p>{{ article.takeaway }}</p>
+
+</div>

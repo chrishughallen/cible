@@ -8,7 +8,13 @@
 
 <div *ngIf="!loading">
   <div *ngFor="let article of articles">
-    {{ article.title }}
+
+    <a [routerLink]="['/archive', article.id]">
+      <h3>{{ article.title }}</h3>
+    </a>
+
+    <p>{{ article.topic }}</p>
+
   </div>
 
   <p *ngIf="articles.length === 0">
