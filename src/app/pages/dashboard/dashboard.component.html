@@ -1,1 +1,26 @@
 <button (click)="logout()">Logout</button>
+
+<main *ngIf="article; else loading">
+  <article class="article">
+    <h1 class="title">{{ article.title }}</h1>
+
+    <section>
+      <h2>Summary</h2>
+      <p>{{ article.summary }}</p>
+    </section>
+
+    <section>
+      <h2>Case Study</h2>
+      <p>{{ article.case_study }}</p>
+    </section>
+
+    <section>
+      <h2>Key Takeaway</h2>
+      <p>{{ article.takeaway }}</p>
+    </section>
+  </article>
+</main>
+
+<ng-template #loading>
+  <p>Loading your daily learning article...</p>
+</ng-template>
