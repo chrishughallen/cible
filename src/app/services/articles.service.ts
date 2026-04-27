@@ -32,4 +32,19 @@ export class ArticlesService {
 
     return data ?? []; // 🔥 CRITICAL FIX
   }
+
+  async getArticleById(id: string) {
+    const { data, error } = await this.supabase.supabase
+      .from('articles')
+      .select('*')
+      .eq('id', id)
+      .single();
+
+    if (error) {
+      console.error(error);
+      throw error;
+    }
+
+    return data;
+  }
 }
