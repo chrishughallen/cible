@@ -19,13 +19,10 @@ export class DashboardComponent implements OnInit {
   constructor(private articleService: ArticleService, private authService: AuthService) {}
 
   async ngOnInit() {
-    console.log('🚀 Dashboard init started');
-
     this.loading = true;
 
     try {
       this.profile = await this.authService.getUserProfile();
-      console.log('👤 PROFILE:', this.profile);
 
       const topics = this.profile?.topics || [];
 
@@ -41,7 +38,6 @@ export class DashboardComponent implements OnInit {
 
     } finally {
       this.loading = false;
-      console.log('✅ Loading finished');
     }
   }
 }

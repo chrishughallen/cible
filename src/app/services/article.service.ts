@@ -77,14 +77,18 @@ export class ArticleService {
     const topic = topics[Math.floor(Math.random() * topics.length)];
     const aiArticle = await this.callEdgeFunction(topic);
 
+    console.log('AI ARTICLE:', aiArticle);
+
     const articleToInsert = {
       user_id: userId,
       generated_for_date: date,
+
       title: aiArticle.title,
       topic,
-      summary: aiArticle.summary,
-      case_study: aiArticle.case_study,
-      takeaway: aiArticle.takeaway,
+      topic_in_a_nutshell: aiArticle.topic_in_a_nutshell,
+      detailed_look: aiArticle.detailed_look,
+      real_world_example: aiArticle.real_world_example,
+      relevant_articles: aiArticle.relevant_articles,
       source_prompt: aiArticle.source_prompt,
     };
 
@@ -98,6 +102,8 @@ export class ArticleService {
       console.error(error);
       throw error;
     }
+
+    console.log('SAVED ARTICLE:', data);
 
     return data;
   }

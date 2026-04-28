@@ -8,25 +8,44 @@
   </ng-container>
 
   <ng-template #articleTpl>
-    <main *ngIf="article">
+    <main *ngIf="article" class="dashboard">
+
       <article class="article">
-        <h1 class="title">{{ article.title }}</h1>
+
+        <p class="topic-label">
+          Today’s Focus:
+
+          <span class="badge">{{ article.topic }}</span>
+        </p>
+
+        <h1 class="title">
+          {{ article.title }}
+        </h1>
 
         <section>
-          <h2>Summary</h2>
-          <p>{{ article.summary }}</p>
+          <h2>In a Nutshell</h2>
+          <p>
+            {{ article.topic_in_a_nutshell }}
+          </p>
         </section>
 
         <section>
-          <h2>Case Study</h2>
-          <p>{{ article.case_study }}</p>
+          <h2>A Deeper Look</h2>
+          <p>
+            {{ article.detailed_look }}
+          </p>
         </section>
 
-        <section>
-          <h2>Key Takeaway</h2>
-          <p>{{ article.takeaway }}</p>
+        <section
+          *ngIf="article.real_world_example"
+        >
+          <h2>Real World Example</h2>
+          <p>
+            {{ article.real_world_example }}
+          </p>
         </section>
       </article>
+
     </main>
   </ng-template>
 
