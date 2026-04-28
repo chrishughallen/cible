@@ -26,7 +26,5 @@ export class LoginComponent {
     if (data?.user) {
       this.router.navigate(['/dashboard']);
     }
-
-    console.log(data, error);
   }
 }
